@@ -196,8 +196,7 @@ const ExpedientesScreen = ({ navigation }) => {
 
       <Text style={styles.title}>EXPEDIENTES</Text>
 
-      <FlatList
-        data={expedientes.slice(startIndex, startIndex + itemsPerPage)}
+      <FlatList data={expedientes.slice(startIndex, startIndex + itemsPerPage)}
         renderItem={renderExpediente}
         keyExtractor={(item, index) => index.toString()}
         style={styles.expedienteList}
@@ -649,7 +648,7 @@ const styles = StyleSheet.create({
 
 
   editButton: {
-    backgroundColor: '#4CAF50', // Cambia el color según tu preferencia
+    backgroundColor: '#4CAF50',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
