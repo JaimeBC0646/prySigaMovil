@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import HeaderLogos from '../components/HeaderLogos';
 
+// Vista de Sesion de usuario
 const SessionUser = ({ navigation }) => {
   return (
     <LinearGradient colors={['#0077cc', '#99ddff']} style={styles.container}>

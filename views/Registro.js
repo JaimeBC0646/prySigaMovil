@@ -3,6 +3,7 @@ import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView 
 import { LinearGradient } from 'expo-linear-gradient';
 import CheckBox from 'expo-checkbox';
 
+// Vista de Registro
 const RegisterScreen = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
   const [apellidoPaterno, setApellidoPaterno] = useState('');

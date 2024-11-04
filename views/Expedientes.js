@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, FlatList, Modal, StyleS
 import { LinearGradient } from 'expo-linear-gradient';
 import HeaderLogos from '../components/HeaderLogos';
 
+// Vista de Expedientes
 const ExpedientesScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
   const [selectedExpediente, setSelectedExpediente] = useState(null); // desplegable
