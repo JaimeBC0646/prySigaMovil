@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { View, Text, Image, TextInput, TouchableOpacity, FlatList, Modal, StyleSheet, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import HeaderLogos from '../components/HeaderLogos';
@@ -31,6 +32,18 @@ const ExpedientesScreen = ({ navigation }) => {
     archivo: '',
   });
 
+=======
+import { View, Text, Image, TextInput, TouchableOpacity, FlatList, Modal, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import HeaderLogos from '../components/HeaderLogos';
+
+const ExpedientesScreen = ({ navigation }) => {
+  const [search, setSearch] = useState('');
+  const [selectedExpediente, setSelectedExpediente] = useState(null); // desplegable
+  const [expedientes, setExpedientes] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalSolicitudVisible, setModalSolicitudVisible] = useState(false);
+>>>>>>> main
 
   // Obtiene data del Webservice
   const fetchExpedientes = async () => {
@@ -38,7 +51,10 @@ const ExpedientesScreen = ({ navigation }) => {
       const response = await fetch('https://sigaemail.host8b.me/expedientes.php');
       const data = await response.json(); // Asumiendo que el response es JSON
       setExpedientes(data); // Guardamos los datos en el estado
+<<<<<<< HEAD
       setSelectedExpediente(null);
+=======
+>>>>>>> main
     } catch (error) {
       console.error('Error fetching expedientes:', error);
     }
@@ -49,6 +65,7 @@ const ExpedientesScreen = ({ navigation }) => {
     fetchExpedientes();
   }, []);
 
+<<<<<<< HEAD
   // Función para avanzar en la lista
   const nextItems = () => {
     if (startIndex + itemsPerPage < expedientes.length) {
@@ -108,6 +125,9 @@ const ExpedientesScreen = ({ navigation }) => {
   };
 
   // Renderiza expedientes
+=======
+  // Renderiza cada expediente
+>>>>>>> main
   const renderExpediente = ({ item, index }) => (
     <View>
       <TouchableOpacity
@@ -128,6 +148,7 @@ const ExpedientesScreen = ({ navigation }) => {
 
       {selectedExpediente === index && (
         <View style={styles.optionMenu}>
+<<<<<<< HEAD
           <TouchableOpacity
             style={styles.optionButton}
             onPress={() => {
@@ -139,6 +160,17 @@ const ExpedientesScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.optionButton} onPress={() => setModalSolicitud(true)}>
+=======
+          <TouchableOpacity style={styles.optionButton} onPress={() => {/* Visualizar el expediente */ }}>
+            <Text style={styles.optionText}>Ver</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.optionButton} onPress={() => {/* Editar el expediente */ }}>
+            <Text style={styles.optionText}>Editar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.optionButton} onPress={() => setModalSolicitudVisible(true)}>
+>>>>>>> main
             <Text style={styles.optionText}>Solicitar</Text>
           </TouchableOpacity>
         </View>
@@ -146,7 +178,10 @@ const ExpedientesScreen = ({ navigation }) => {
     </View>
   );
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   return (
     <LinearGradient colors={['#0077cc', '#e6f7ff']} style={styles.container}>
       <HeaderLogos />
@@ -158,7 +193,11 @@ const ExpedientesScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.actionBar}>
+<<<<<<< HEAD
         <TouchableOpacity style={styles.actionButton} onPress={() => setModalAcciones(true)}>
+=======
+        <TouchableOpacity style={styles.actionButton} onPress={() => setModalVisible(true)}>
+>>>>>>> main
           <Text style={styles.actionText}>ACCIONES</Text>
         </TouchableOpacity>
         <TextInput
@@ -173,12 +212,17 @@ const ExpedientesScreen = ({ navigation }) => {
       <Text style={styles.title}>EXPEDIENTES</Text>
 
       <FlatList
+<<<<<<< HEAD
         data={expedientes.slice(startIndex, startIndex + itemsPerPage)}
+=======
+        data={expedientes}
+>>>>>>> main
         renderItem={renderExpediente}
         keyExtractor={(item, index) => index.toString()}
         style={styles.expedienteList}
       />
 
+<<<<<<< HEAD
       <View style={styles.paginationContainer}>
         <TouchableOpacity onPress={() => { prevItems; }} disabled={startIndex === 0}>
           <Text style={[styles.paginationButton, startIndex === 0 && styles.disabledButton]}>Anterior</Text>
@@ -192,17 +236,28 @@ const ExpedientesScreen = ({ navigation }) => {
 
       {/* MODALES */}
 
+=======
+>>>>>>> main
       {/* Modal de Acciones */}
       <Modal
         animationType="slide"
         transparent={true}
+<<<<<<< HEAD
         visible={modalAcciones}
         onRequestClose={() => setModalAcciones(false)}
+=======
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+>>>>>>> main
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
+<<<<<<< HEAD
               <Text onPress={() => setModalAcciones(false)}>
+=======
+              <Text onPress={() => setModalVisible(false)}>
+>>>>>>> main
                 <Image
                   source={require('../assets/icon_close.png')}
                   style={styles.modalClose} />
@@ -210,9 +265,15 @@ const ExpedientesScreen = ({ navigation }) => {
             </View>
             <Text style={styles.modalTitle}>SELECCIONE LA ACCION A REALIZAR</Text>
             <View style={styles.optionsContainer}>
+<<<<<<< HEAD
               <TouchableOpacity style={styles.optionButton} onPress={() => setModalAgregar(true)}>
                 <Image source={require('../assets/icon_expediente.png')} style={styles.optionIcon} />
                 <Text style={styles.actionText}>AGREGAR NUEVO EXPEDIENTE</Text>
+=======
+              <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('Expedientes')}>
+                <Image source={require('../assets/icon_expediente.png')} style={styles.optionIcon} />
+                <Text style={styles.optionText}>REGISTRAR NUEVO EXPEDIENTE</Text>
+>>>>>>> main
               </TouchableOpacity>
               <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('Main')}>
                 <Image source={require('../assets/icon_logout.png')} style={styles.optionIcon} />
@@ -223,6 +284,7 @@ const ExpedientesScreen = ({ navigation }) => {
         </View>
       </Modal>
 
+<<<<<<< HEAD
       {/* Modal de Visualización */}
       <Modal
         animationType="slide"
@@ -388,17 +450,28 @@ const ExpedientesScreen = ({ navigation }) => {
         </View>
       </Modal>
 
+=======
+>>>>>>> main
       {/* Modal de Solicitudes */}
       <Modal
         animationType="slide"
         transparent={true}
+<<<<<<< HEAD
         visible={modalSolicitud}
         onRequestClose={() => setModalSolicitud(false)}
+=======
+        visible={modalSolicitudVisible}
+        onRequestClose={() => setModalSolicitudVisible(false)}
+>>>>>>> main
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
+<<<<<<< HEAD
               <Text onPress={() => setModalSolicitud(false)}>
+=======
+              <Text onPress={() => setModalSolicitudVisible(false)}>
+>>>>>>> main
                 <Image
                   source={require('../assets/icon_close.png')}
                   style={styles.modalClose}
@@ -425,13 +498,18 @@ const ExpedientesScreen = ({ navigation }) => {
               <TouchableOpacity style={styles.solicitarButton}>
                 <Text style={styles.solicitarButtonText}>Solicitar</Text>
               </TouchableOpacity>
+<<<<<<< HEAD
               <TouchableOpacity style={styles.cancelarButton} onPress={() => setModalSolicitud(false)}>
+=======
+              <TouchableOpacity style={styles.cancelarButton} onPress={() => setModalSolicitudVisible(false)}>
+>>>>>>> main
                 <Text style={styles.cancelarButtonText}>Cancelar</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
+<<<<<<< HEAD
 
       {/* Modal de Agregar Expediente */}
       <Modal
@@ -528,6 +606,8 @@ const ExpedientesScreen = ({ navigation }) => {
 
 
 
+=======
+>>>>>>> main
     </LinearGradient>
   );
 };
@@ -623,6 +703,7 @@ const styles = StyleSheet.create({
 
 
 
+<<<<<<< HEAD
   editButton: {
     backgroundColor: '#4CAF50', // Cambia el color según tu preferencia
     padding: 10,
@@ -636,6 +717,8 @@ const styles = StyleSheet.create({
   },
 
 
+=======
+>>>>>>> main
 
   // Estilos del modal de acciones
   modalContainer: {
@@ -752,6 +835,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 20,
   },
+<<<<<<< HEAD
 
 
 
@@ -800,6 +884,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+=======
+>>>>>>> main
   solicitarButton: {
     backgroundColor: '#0077cc',
     padding: 10,
@@ -825,6 +911,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+<<<<<<< HEAD
   // Boton de carga de registros
   paginationContainer: {
     flexDirection: 'row',
@@ -841,6 +928,8 @@ const styles = StyleSheet.create({
     color: '#ccc',
   },
 
+=======
+>>>>>>> main
 });
 
 export default ExpedientesScreen;
