@@ -1,0 +1,75 @@
+# 1. Estructura del Archivo YAML
+name: Flujo de Trabajo CI/CD PWA
+
+# Configuración de los desencadenadores correctos (on:):
+on:
+  push:
+    branches:
+      - main
+      - jbcCodeSM
+  pull_request:
+    branches:
+      - main
+      - jbcCodeSM
+  workflow_dispatch:         # Opción para activación manual
+
+# 2. Configuración del Entorno
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.X]
+
+    steps:
+      - name: Revisar código
+        uses: actions/checkout@v2
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Instalar dependencias
+        run: npm ci # O npm install si no tienes package-lock.json
+
+      - name: Caché de dependencias
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+# 4. Etapa de Compilación
+      - name: Compilar el proyecto
+        run: npm run build # Compila el proyecto
+
+      # Guarda el artefacto de compilación
+      - name: Subir Artefactos de Compilación
+        uses: actions/upload-artifact@v3 # Actualiza a la versión 3
+        with:
+          name: build-artifact
+          path: build/ # Ajusta la ruta según tu estructura de proyecto
+
+# 5. Etapa de Pruebas (React)
+      - name: Ejecutar pruebas unitarias
+        run: npm test # Ejecuta las pruebas unitarias
+
+      # Si deseas incluir pruebas de E2E con Cypress
+      - name: Iniciar el servidor
+        run: npm start & # Inicia el servidor en segundo plano
+
+      # Espera a que el servidor esté disponible
+      - name: Esperar al servidor
+        run: |
+          echo "Esperando a que el servidor inicie..."
+          sleep 10 # Espera 10 segundos para asegurarte de que el servidor esté listo
+
+      - name: Ejecutar pruebas de extremo a extremo
+        run: npm run cypress:run # Asegúrate de que este comando esté configurado en tu package.json
+
+      # Ejecución de pruebas de cobertura
+      - name: Ejecutar pruebas con cobertura
+        run: npm test -- --coverage # Ejecuta las pruebas y genera un reporte de cobertura

@@ -47,14 +47,16 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.lblText}>USUARIO</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor="#000"
+          placeholder = 'user'
+          placeholderTextColor="#A9A9B0"
           value={username}
           onChangeText={setUsername}
         />
         <Text style={styles.lblText}>CONTRASEÑA</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor="#000"
+          placeholder = 'pass'
+          placeholderTextColor="#A9A9B0"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
