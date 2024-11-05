@@ -1,59 +1,20 @@
 import React, { useState } from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Image, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CheckBox from 'expo-checkbox';
-import { Picker } from '@react-native-picker/picker';
 
 const RegisterScreen = ({ navigation }) => {
-  const [nuevoUsuario, setNuevoUsuario] = useState({
-    nombre: '',
-    apellidoPaterno: '',
-    apellidoMaterno: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    preguntaSecreta: '',
-    respuestaSecreta: '',
-    telefono: '',
-    usuario: '',
-  });
+  const [nombre, setNombre] = useState('');
+  const [apellidoPaterno, setApellidoPaterno] = useState('');
+  const [apellidoMaterno, setApellidoMaterno] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [preguntaSecreta, setPreguntaSecreta] = useState('');
+  const [respuesta, setRespuesta] = useState('');
   const [aceptaPoliticas, setAceptaPoliticas] = useState(false);
-
-
-  const handleRegister = async () => {
-    if (!nuevoUsuario.nombre || !nuevoUsuario.apellidoPaterno || !nuevoUsuario.email || !nuevoUsuario.password) {
-      Alert.alert('Campos incompletos', 'Por favor rellene cada campo');
-    } else if (!aceptaPoliticas) {
-      Alert.alert('Políticas de privacidad', 'Debe aceptar las políticas de privacidad para registrarse.');
-    } else {
-      try {
-        //console.log("\n\n\n Response server 1: ", data, '\n\n\n');
-        //console.log("Datos a registrar:", nuevoUsuario);
-        const response = await fetch('https://sigaemail.host8b.me/registro_mobile.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(nuevoUsuario),
-        });
-
-
-
-        const data = await response.json();
-
-        console.log("\n\n\n Response server 1: ", data, '\n\n\n');
-
-
-        if (data.success) {
-          Alert.alert('Registro exitoso', 'Usuario registrado correctamente');
-          navigation.navigate('Login');
-        } else {
-          Alert.alert('Registro fallido', data.message);
-        }
-      } catch (error) {
-        console.error('Error durante el registro:', error);
-        Alert.alert('Error', 'Hubo un problema al conectar con el servidor');
-      }
-    }
-  };
 
   return (
     <LinearGradient colors={['#0077cc', '#e6f7ff']}>
@@ -67,15 +28,15 @@ const RegisterScreen = ({ navigation }) => {
           <Text style={styles.title}>Registro</Text>
 
 
-
-          <Text style={styles.lblName}>Nombre: </Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Nombre's"
-            value={nuevoUsuario.nombre}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, nombre: text })}
-          />
-
+          
+            <Text style={styles.lblName}>Nombre: </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Nombre"
+              value={nombre}
+              onChangeText={setNombre}
+            />
+          
 
           <View style={styles.lbl_Input}>
             <Text style={styles.lblName}>Apellido Paterno: </Text>
@@ -83,8 +44,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Apellido Paterno"
-            value={nuevoUsuario.apellidoPaterno}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, apellidoPaterno: text })}
+            value={apellidoPaterno}
+            onChangeText={setApellidoPaterno}
           />
 
           <View style={styles.lbl_Input}>
@@ -93,8 +54,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Apellido Materno"
-            value={nuevoUsuario.apellidoMaterno}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, apellidoMaterno: text })}
+            value={apellidoMaterno}
+            onChangeText={setApellidoMaterno}
           />
 
           <View style={styles.lbl_Input}>
@@ -103,8 +64,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Email"
-            value={nuevoUsuario.email}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, email: text })}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <View style={styles.lbl_Input}>
@@ -113,8 +74,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Teléfono"
-            value={nuevoUsuario.telefono}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, telefono: text })}
+            value={telefono}
+            onChangeText={setTelefono}
           />
 
           <View style={styles.lbl_Input}>
@@ -123,8 +84,8 @@ const RegisterScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Crear Usuario"
-            value={nuevoUsuario.usuario}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, usuario: text })}
+            value={usuario}
+            onChangeText={setUsuario}
           />
 
           <View style={styles.lbl_Input}>
@@ -134,8 +95,8 @@ const RegisterScreen = ({ navigation }) => {
             style={styles.input}
             placeholder="Crear Contraseña"
             secureTextEntry={true}
-            value={nuevoUsuario.password}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, password: text })}
+            value={password}
+            onChangeText={setPassword}
           />
 
           <View style={styles.lbl_Input}>
@@ -145,49 +106,34 @@ const RegisterScreen = ({ navigation }) => {
             style={styles.input}
             placeholder="Confirmar Contraseña"
             secureTextEntry={true}
-            value={nuevoUsuario.confirmPassword}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, confirmPassword: text })}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
 
           <View style={styles.lbl_Input}>
             <Text style={styles.lblName}>Pregunta Secreta: </Text>
           </View>
-
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={nuevoUsuario.preguntaSecreta}  // Valor actualmente seleccionado
-              onValueChange={(itemValue) =>
-                setNuevoUsuario({ ...nuevoUsuario, preguntaSecreta: itemValue })  // Actualiza el estado con la opción seleccionada
-              }
-            >
-              <Picker.Item style={styles.pickerContainer} label="Seleccione una pregunta" value="" />
-              <Picker.Item style={styles.pickerContainer} label="¿Cómo se llamaba tu primera mascota?" value="1" />
-              <Picker.Item style={styles.pickerContainer} label="¿Cuál es tu comida favorita?" value="2" />
-              <Picker.Item style={styles.pickerContainer} label="¿Cuál es tu color favorito?" value="3" />
-              <Picker.Item style={styles.pickerContainer} label="¿Cómo se llama tu cantante favorito?" value="4" />
-            </Picker>
-          </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Pregunta Secreta"
+            value={preguntaSecreta}
+            onChangeText={setPreguntaSecreta}
+          />
 
           <View style={styles.lbl_Input}>
             <Text style={styles.lblName}>Respuesta: </Text>
           </View>
-          <TextInput
-            style={styles.input}
-            placeholder="Respuesta Secreta"
-            value={nuevoUsuario.respuestaSecreta}
-            onChangeText={(text) => setNuevoUsuario({ ...nuevoUsuario, respuestaSecreta: text })}
-          />
-
+          
 
           <View style={styles.checkboxContainer}>
             <CheckBox
               value={aceptaPoliticas}
-              onValueChange={() => { setAceptaPoliticas(true) }}
+              onValueChange={setAceptaPoliticas}
             />
             <Text style={styles.checkboxLabel}>Acepto las políticas de privacidad</Text>
           </View>
 
-          <TouchableOpacity style={styles.createButton} onPress={handleRegister}>
+          <TouchableOpacity style={styles.createButton}>
             <Text style={styles.createButtonText}>CREAR</Text>
           </TouchableOpacity>
         </View>
@@ -212,22 +158,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 20,
   },
-
-
-
-  pickerContainer: {
-    fontSize: 13,
-    width: '80%',
-    borderWidth: 1,
-    borderColor: '#000',
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-
-
-
-
-
   logo: {
     width: 140,
     height: 55,
@@ -244,12 +174,12 @@ const styles = StyleSheet.create({
 
 
 
-  lbl_Input: {
+  lbl_Input:{
     flexDirection: 'row',
     alignItems: 'center'
 
   },
-  lblName: {
+  lblName:{
     fontSize: 18,
   },
 

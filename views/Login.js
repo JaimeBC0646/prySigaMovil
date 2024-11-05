@@ -1,33 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('https://sigaemail.host8b.me/loginmovi.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        // Redirige a la pantalla de usuario o sesión activa si el login fue exitoso
-        navigation.navigate('SesionUser');
-      } else {
-        // Muestra un mensaje de error si las credenciales son incorrectas
-        Alert.alert('Error', 'Usuario o contraseña incorrectos')
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      Alert.alert('Error', 'Hubo un problema al conectar con el servidor');
-    }
-  };
 
   return (
     <LinearGradient colors={['#0077cc', '#e6f7ff']} style={styles.container}>
@@ -36,6 +13,7 @@ const LoginScreen = ({ navigation }) => {
         style={styles.logo}
       />
 
+      
       <View style={styles.formContainer}>
         <Text style={styles.title}>INICIAR SESIÓN</Text>
 
@@ -47,28 +25,28 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.lblText}>USUARIO</Text>
         <TextInput
           style={styles.input}
-          placeholder = 'user'
-          placeholderTextColor="#A9A9B0"
+          placeholderTextColor="#000"
           value={username}
           onChangeText={setUsername}
         />
+        
         <Text style={styles.lblText}>CONTRASEÑA</Text>
         <TextInput
           style={styles.input}
-          placeholder = 'pass'
-          placeholderTextColor="#A9A9B0"
+          placeholderTextColor="#000"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
         />
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('SesionUser')}>
           <Text style={styles.loginButtonText}>ACCEDER</Text>
         </TouchableOpacity>
 
+        {/* Enlace para recuperar contraseña */}
         <TouchableOpacity>
           <Text style={styles.forgotPasswordText}>
-            ¿No recuerdas tu contraseña? Recuperar por Pregunta Secreta
+            No recuerdas tu contraseña? Recuperar por Pregunta Secreta
           </Text>
         </TouchableOpacity>
       </View>
@@ -118,7 +96,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  lblText: {
+  lblText:{
     fontSize: 25,
     fontWeight: 'bold',
   },
