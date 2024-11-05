@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-
 const MainScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
