@@ -77,7 +77,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
-          path: build/
+          path: web-build/
 
   deploy:
     runs-on: ubuntu-latest
