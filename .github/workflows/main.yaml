@@ -48,26 +48,7 @@ jobs:
       - name: Ejecutar pruebas unitarias
         run: npm test
 
-      # 7. Generar reporte de cobertura
-      - name: Ejecutar pruebas con cobertura
-        run: npm run test:coverage
-
-      # 8. Subir reporte de cobertura como artefacto
-      - name: Guardar reporte de cobertura
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage
-
-      # 9. Pruebas E2E
-      #- name: Iniciar el servidor para pruebas E2E
-      #  run: npm start &
-      #- name: Esperar al servidor
-      #  run: |
-      #    echo "Esperando al servidor para pruebas E2E..."
-      #    sleep 10
-      #- name: Ejecutar pruebas E2E
-      #  run: npm run cypress:run
+      
 
       # 10. Compilación del proyecto
       - name: Compilar el proyecto
