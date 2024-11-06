@@ -41,7 +41,7 @@ jobs:
 
       # 5. Instalar dependencias
       - name: Instalar dependencias web para Expo
-    run: npx expo install react-native-web react-dom @expo/metro-runtime
+        run: npx expo install react-native-web react-dom @expo/metro-runtime
         
 
       # 6. Ejecución de pruebas unitarias
