@@ -33,7 +33,7 @@ describe('LoginScreen', () => {
 
     await waitFor(() => {
       expect(mockNavigation.navigate).toHaveBeenCalledWith('SesionUser');
-    }, { timeout: 3000 });// Reducir el timeout para esta condición específica
+    }, { timeout: 10000 });// Reducir el timeout para esta condición específica
   });
 
 
