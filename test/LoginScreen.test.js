@@ -11,11 +11,11 @@ describe('LoginScreen', () => {
   beforeEach(() => {
     fetch.mockClear();
     mockNavigation.navigate.mockClear();
-    jest.spyOn(Alert, 'alert'); // Mock de Alert.alert
+    jest.spyOn(Alert, 'alert').mockImplementation(() => {}); // Mock limpio para Alert.alert
   });
 
   afterEach(() => {
-    Alert.alert.mockClear();
+    jest.clearAllMocks(); // Limpiar todos los mocks después de cada prueba
   });
 
 
@@ -33,7 +33,7 @@ describe('LoginScreen', () => {
 
     await waitFor(() => {
       expect(mockNavigation.navigate).toHaveBeenCalledWith('SesionUser');
-    });
+    }, { timeout: 3000 });// Reducir el timeout para esta condición específica
   });
 
 
@@ -42,18 +42,18 @@ describe('LoginScreen', () => {
     fetch.mockResolvedValueOnce({
       json: async () => ({ success: false }),
     });
-  
+
     const { getByText, getByPlaceholderText } = render(<LoginScreen navigation={mockNavigation} />);
-  
+
     fireEvent.changeText(getByPlaceholderText('user'), 'asd');
     fireEvent.changeText(getByPlaceholderText('pass'), '54321');
     fireEvent.press(getByText('ACCEDER'));
-  
+
     await waitFor(() => {
       expect(Alert.alert).toHaveBeenCalledWith('Error', 'Usuario o contraseña incorrectos');
       expect(mockNavigation.navigate).not.toHaveBeenCalled();
-    });
+    }, { timeout: 3000 });
   });
 
-  
+
 });

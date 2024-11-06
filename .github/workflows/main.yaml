@@ -47,7 +47,7 @@ jobs:
 
       # 6. Ejecución de pruebas unitarias
       - name: Ejecutar pruebas unitarias
-        run: npm test
+        run: npm test -- --detectOpenHandles
 
       # 7. Generar reporte de cobertura
       #- name: Ejecutar pruebas con cobertura
