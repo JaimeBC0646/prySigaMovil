@@ -61,14 +61,14 @@ jobs:
       #    path: coverage
 
       # 9. Pruebas E2E
-      #- name: Iniciar el servidor para pruebas E2E
-      #  run: npm start &
-      #- name: Esperar al servidor
-      #  run: |
-      #    echo "Esperando al servidor para pruebas E2E..."
-      #    sleep 10
-      #- name: Ejecutar pruebas E2E
-      #  run: npm run cypress:run
+      - name: Iniciar el servidor para pruebas E2E
+        run: npm start &
+      - name: Esperar al servidor
+        run: |
+          echo "Esperando al servidor para pruebas E2E..."
+          sleep 10
+      - name: Ejecutar pruebas E2E
+        run: npx cypress run
 
       # 10. Compilación del proyecto
       - name: Compilar el proyecto

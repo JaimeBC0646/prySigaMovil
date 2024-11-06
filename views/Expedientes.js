@@ -34,7 +34,7 @@ const ExpedientesScreen = ({ navigation }) => {
   // Obtiene data del Webservice
   const fetchExpedientes = async () => {
     try {
-      const response = await fetch('https://sigaemail.host8b.me/expedientes.php');
+      const response = await fetch('https://sigaemail.host8b.me/expedientes_mobile.php');
       const data = await response.json(); // Asumiendo que el response es JSON
       setExpedientes(data); // Guardamos los datos en el estado
       setSelectedExpediente(null);
@@ -131,6 +131,8 @@ const ExpedientesScreen = ({ navigation }) => {
         if (data.success) {
           Alert.alert('Expediente cargado', 'Datos registrados correctamente')
           setModalAgregar(false);
+          setModalVer(false);
+          setModalAcciones(false);
           fetchExpedientes();
         } else {
           console.error('Error al agregar el expediente:', data.message);
@@ -194,7 +196,13 @@ const ExpedientesScreen = ({ navigation }) => {
         />
       </View>
 
-      <Text style={styles.title}>EXPEDIENTES</Text>
+      <View style={styles.btnReload}>
+        <Text style={styles.title}>EXPEDIENTES</Text>
+        <TouchableOpacity onPress={() => fetchExpedientes()}>
+          <Image source={require('../assets/reloadIcon.png')} style={styles.reloadIcon} alt='reloadIcon'/>
+        </TouchableOpacity>
+      </View>
+
 
       <FlatList data={expedientes.slice(startIndex, startIndex + itemsPerPage)}
         renderItem={renderExpediente}
@@ -561,6 +569,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
 
+  },
+
+  btnReload: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  reloadIcon: {
+    width: 25,
+    height: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 20
   },
 
 
