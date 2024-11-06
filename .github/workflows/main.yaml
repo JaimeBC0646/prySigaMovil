@@ -1,4 +1,3 @@
-# // Estructura del Archivo YAML
 name: CI/CD SigaMovil # Nombre del flujo de trabajo
 
 on:
@@ -6,13 +5,14 @@ on:
     branches:
       - main
       - jbcCodeSM
+      
   pull_request:
     branches:
       - main
       - jbcCodeSM
+      
   workflow_dispatch: # Permite la ejecución manual del flujo de trabajo
 
-# // Configuración del Entorno
 jobs:
   build-and-test:
     runs-on: ubuntu-latest # Sistema operativo para el job
@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-node-
 
       # 4. Configurar variables de entorno
-      # - name: Configurar variables de entorno
+      #- name: Configurar variables de entorno
       #  run: echo "REACT_APP_GOOGLE_API_KEY=${{ secrets.REACT_APP_GOOGLE_API_KEY }}" >> $GITHUB_ENV
 
       # 5. Instalar dependencias
@@ -47,18 +47,18 @@ jobs:
 
       # 6. Ejecución de pruebas unitarias
       - name: Ejecutar pruebas unitarias
-        run: npm test
+        run: npm test -- --detectOpenHandles
 
       # 7. Generar reporte de cobertura
-      - name: Ejecutar pruebas con cobertura
-        run: npm run test:coverage
+      #- name: Ejecutar pruebas con cobertura
+      #  run: npm run test:coverage
 
       # 8. Subir reporte de cobertura como artefacto
-      - name: Guardar reporte de cobertura
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage
+      #- name: Guardar reporte de cobertura
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: coverage-report
+      #    path: coverage
 
       # 9. Pruebas E2E
       - name: Iniciar el servidor para pruebas E2E
@@ -68,7 +68,7 @@ jobs:
           echo "Esperando al servidor para pruebas E2E..."
           sleep 10
       - name: Ejecutar pruebas E2E
-        run: npm run cypress:run
+        run: npx cypress run
 
       # 10. Compilación del proyecto
       - name: Compilar el proyecto
@@ -93,5 +93,5 @@ jobs:
 
       # 2. Desplegar aplicación
       - name: Desplegar aplicación
-        run: echo "Aquí se colocara la configuración para desplegar en el entorno de producción"
-        # Configurar servicio de despliegue
+        run: echo "Aquí iría la configuración para desplegar en el entorno de producción"
+        # Configura aquí el servicio de despliegue específico como Netlify, Vercel o Firebase
