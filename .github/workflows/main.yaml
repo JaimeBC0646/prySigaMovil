@@ -40,8 +40,9 @@ jobs:
       #  run: echo "REACT_APP_GOOGLE_API_KEY=${{ secrets.REACT_APP_GOOGLE_API_KEY }}" >> $GITHUB_ENV
 
       # 5. Instalar dependencias
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Instalar dependencias web para Expo
+    run: npx expo install react-native-web react-dom @expo/metro-runtime
+        
 
       # 6. Ejecución de pruebas unitarias
       - name: Ejecutar pruebas unitarias
