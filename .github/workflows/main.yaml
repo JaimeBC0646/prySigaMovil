@@ -1,4 +1,4 @@
-name: CI/CD SigaMovil # Nombre del flujo de trabajo
+name: CI/CD SigaMovil # Flujo de trabajo
 
 on:
   push:
