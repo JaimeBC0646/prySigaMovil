@@ -88,8 +88,6 @@ jobs:
 
       # 4. Desplegar en Vercel
       - name: Desplegar en Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           # Comando de despliegue con Vercel
-          npx vercel --prod --yes
+          npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
