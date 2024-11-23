@@ -1,4 +1,4 @@
-name: CI/CD SigaMovil # Flujo de trabajo (Actual)
+name: CI/CD SigaMovil # Flujo de trabajo
 
 on:
   push:
@@ -39,26 +39,26 @@ jobs:
         run: npm test
 
       # 6. Pruebas E2E
-      #- name: Iniciar el servidor para pruebas E2E
-      #  run: npm start &
-      #- name: Esperar al servidor
-      #  run: |
-      #    echo "Esperando al servidor para pruebas E2E..."
-      #    sleep 10
-      #- name: Ejecutar pruebas E2E
-      #  run: npx cypress run
+      - name: Iniciar el servidor para pruebas E2E
+        run: npm start &
+      - name: Esperar al servidor
+        run: |
+          echo "Esperando al servidor para pruebas E2E..."
+          sleep 10
+      - name: Ejecutar pruebas E2E
+        run: npx cypress run
 
       # 7. Instalar eas-cli
       - name: Instalar eas-cli
         run: npm install -g eas-cli
 
       # 8. Generar APK con Expo
-      #- name: Generar APK con Expo
-      #  env:
-      #    EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-      #  run: |
-      #    # Construye apk
-      #    eas build --platform android --non-interactive
+      - name: Generar APK con Expo
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          # Construye apk
+          eas build --platform android --non-interactive
 
       # 9. Subir APK como artefacto
       - name: Subir APK como artefacto
