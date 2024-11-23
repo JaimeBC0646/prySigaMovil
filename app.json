@@ -4,7 +4,7 @@
     "slug": "SigaMobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/SigaLogo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,9 +13,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/SigaLogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jimmy03.SigaMobile"
     },
     "web": {
       "bundler": "metro",
@@ -27,8 +28,8 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "image": "./assets/images/SigaLogo.png",
+          "imageWidth": 150,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
@@ -36,6 +37,19 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3840062f-ba82-4546-b610-87b20f6ffee0"
+      }
     }
   }
 }
