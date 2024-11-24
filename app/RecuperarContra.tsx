@@ -51,7 +51,7 @@ const RecuperarPasswordScreen = () => {
           const sendGridResponse = await fetch('https://api.sendgrid.com/v3/mail/send', {
             method: 'POST',
             headers: {
-              Authorization: `Bearer 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`,
+              Authorization: `Bearer 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`,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
