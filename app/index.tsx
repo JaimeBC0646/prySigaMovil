@@ -10,9 +10,6 @@ Sentry.init({
   debug: true,
 });
 export default function HomeScreen() {
-  useEffect(() => {
-    throw new Error('Error de prueba para Sentry');
-  }, []);
   return (
     <Sentry.ErrorBoundary
       fallback={({ error, resetError }) => (

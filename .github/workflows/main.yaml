@@ -58,12 +58,12 @@ jobs:
         run: npm install -g eas-cli
 
       # 8. Generar APK con Expo
-      - name: Generar APK con Expo
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-        run: |
-          # Construye apk
-          eas build --platform android --non-interactive
+      #- name: Generar APK con Expo
+      #  env:
+      #    EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      #  run: |
+      #    # Construye apk
+      #    eas build --platform android --non-interactive
 
       # 9. Subir APK como artefacto
       - name: Subir APK como artefacto
