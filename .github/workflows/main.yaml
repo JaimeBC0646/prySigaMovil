@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - jbcCodeSM
-  workflow_dispatch: # Permite la ejecución manual del flujo de trabajo
+      
+  pull_request:
+    branches:
+      - main
+      - jbcCodeSM
+  workflow_dispatch: # Ejecución manual del workflow
 
 jobs:
   build-and-test:
