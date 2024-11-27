@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View, Button } from 'react-native';
 import * as Sentry from '@sentry/react-native';
 import MainScreen from './Main';
+import { Analytics } from "@vercel/analytics/react"
+
 
 // Inicializar Sentry
 Sentry.init({
@@ -20,6 +22,7 @@ export default function HomeScreen() {
         </View>
       )}
     >
+      <Analytics/>
       <MainScreen />
     </Sentry.ErrorBoundary>
   );
